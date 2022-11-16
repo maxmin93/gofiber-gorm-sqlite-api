@@ -1,5 +1,7 @@
 # REST API using Go Fiber and GORM
 
+<img alt="gofiber logo" src="https://gofiber.io/assets/images/embed.png" width="580"></img>
+
 ## 1. 프로젝트 개요
 
 ![Performance Benchmark of Gofiber and Others](https://taejoone.jeju.onl/assets/img/2022/11/15-benchmark-requests-fiber-crunch.png){: width="560"}
@@ -99,7 +101,7 @@ func main() {
 }
 ```
 
-## 2. [Go-Fiber](https://docs.gofiber.io/) 웹서버
+## 3. [Go-Fiber](https://docs.gofiber.io/) 웹서버
 
 ### 1) [미들웨어](https://docs.gofiber.io/api/middleware)
 
@@ -202,9 +204,7 @@ func getQueryParams(c *fiber.Ctx) map[string]string {
 
 ### 3) Endpoints
 
-- PUT 은 전체를 업데이트하고, PATCH 는 부분 업데이트라지만
-
-  - 귀찮아서 둘 다 같은 (부분 업데이트) 함수에 연결했다
+- PUT 은 필드 전체를 업데이트하고, PATCH 는 부분 업데이트를 한다
 
 - 라우터의 Path 파라미터에 제약사항을 설정할 수 있다.
   - 제약사항에 위배되면 `404 Not Found` 로 처리됨
@@ -223,7 +223,7 @@ func getQueryParams(c *fiber.Ctx) map[string]string {
   api.Delete("/dogs/:id<int>", db.RemoveDog)
 ```
 
-## 3. [GORM](https://gorm.io/docs/) with SQLite3
+## 4. [GORM](https://gorm.io/docs/) with SQLite3
 
 ### 1) 설정
 
@@ -509,7 +509,7 @@ Not Found
 14:54:32 | 404 |      0s |       127.0.0.1 | GET     | /api/dogs/4
 ```
 
-## 4. Others
+## 5. Others
 
 ### 1) 유틸리티 함수들
 
