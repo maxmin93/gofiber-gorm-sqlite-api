@@ -1,0 +1,67 @@
+GET http://localhost:3000/click HTTP/1.1
+
+###
+
+GET http://localhost:3000/cacheHits HTTP/1.1
+
+###
+
+GET http://localhost:3000/api/dogs HTTP/1.1
+
+###
+
+POST http://localhost:3000/api/dogs HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Max Junior",
+    "breed": "Shepherd",
+    "age": 4,
+    "isGoodBoy": true
+}
+
+###
+
+PUT http://localhost:3000/api/dogs/4 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Max Junior",
+    "breed": "Shepherd (German)",
+    "age": 9
+}
+
+###
+
+GET http://localhost:3000/api/dogs/4 HTTP/1.1
+
+###
+
+PATCH http://localhost:3000/api/dogs/4 HTTP/1.1
+content-type: application/json
+
+{
+    "age": null,
+    "isGoodBoy": false
+}
+
+###
+
+GET http://localhost:3000/api/dogs/4 HTTP/1.1
+
+###
+
+DELETE http://localhost:3000/api/dogs/x1 HTTP/1.1
+
+###
+
+DELETE http://localhost:3000/api/dogs/1 HTTP/1.1
+
+###
+
+DELETE http://localhost:3000/api/dogs/4 HTTP/1.1
+
+###
+
+GET http://localhost:3000/api/dogs/4 HTTP/1.1
+
