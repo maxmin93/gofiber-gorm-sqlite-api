@@ -587,6 +587,22 @@ func (m MapT) Filter(keys []string) map[string]interface{} {
 }
 ```
 
+## 6. Docker build & run
+
+놀라운 이미지 크기 `19MB` <span style="color:green;font-weight:700;font-size:40px"> 😲</span>
+
+```bash
+$ docker build -t gofiber-sqlite --no-cache .
+$ docker image ls gofiber-sqlite
+REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
+gofiber-sqlite   latest    a240a33bf435   10 minutes ago   19MB
+
+# 환경변수 DB_URL, PORT 필요
+$ docker run -lt --name gofiber-sqlite -p 3000:3000 -e DB_URL="file:memdb2?mode=memory" -e PORT=3000 gofiber-sqlite
+
+$ docker rm -f $(docker ps -l -q)
+```
+
 ## 9. Summary
 
 [태주네이야기/Post](https://taejoone.jeju.onl/posts/2022-11-15-golang-tutorial-day5/)

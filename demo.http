@@ -2,6 +2,10 @@ GET http://localhost:3000/click HTTP/1.1
 
 ###
 
+GET http://localhost:3000/click?refresh=true HTTP/1.1
+
+###
+
 GET http://localhost:3000/cacheHits HTTP/1.1
 
 ###
@@ -48,10 +52,6 @@ content-type: application/json
 ###
 
 GET http://localhost:3000/api/dogs/4 HTTP/1.1
-
-###
-
-DELETE http://localhost:3000/api/dogs/x1 HTTP/1.1
 
 ###
 
