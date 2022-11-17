@@ -9,6 +9,7 @@ RUN CGO_ENABLED=1 GOOS=linux go build -o /app -a -ldflags '-linkmode external -e
 
 FROM scratch
 COPY --from=builder /app /app
+COPY --from=builder /src/views /views
 EXPOSE 3000
 
 ENTRYPOINT ["/app"]

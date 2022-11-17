@@ -2,24 +2,10 @@ package utils
 
 import (
 	"encoding/json"
-	"fmt"
-	"os"
 
-	"github.com/joho/godotenv"
 	"golang.org/x/exp/maps"
 	"golang.org/x/exp/slices"
 )
-
-// Config func to get env value
-func Config(key string) string {
-	// load .env file
-	err := godotenv.Load(".env")
-	if err != nil {
-		fmt.Print("Error loading .env file")
-	}
-	// Return the value of the variable
-	return os.Getenv(key)
-}
 
 // ExtractAndCheckField extract json fields and Check if field exists
 func ExtractAndCheckField(jsonStr []byte, field string) bool {

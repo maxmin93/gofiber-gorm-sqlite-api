@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 
 	"example.com/db"
 	m "example.com/models"
@@ -10,6 +11,7 @@ import (
 	"example.com/web"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -25,11 +27,17 @@ func main() {
 
 	//////////////////////////////////////////
 
+	// load .env file
+	err := godotenv.Load(".env")
+	if err != nil {
+		fmt.Print("Error loading .env file")
+	}
+
 	db.Connect()
 
 	app := fiber.New()
 	web.SetupFiber(app)
 
-	var port = u.Config("PORT")
+	var port = os.Getenv("PORT")
 	log.Fatal(app.Listen(":" + port))
 }

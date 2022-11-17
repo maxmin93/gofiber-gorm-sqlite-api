@@ -2,9 +2,9 @@ package db
 
 import (
 	"log"
+	"os"
 
 	m "example.com/models"
-	u "example.com/utils"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -16,7 +16,7 @@ var Database *gorm.DB
 // Connect to database
 func Connect() error {
 	var err error
-	dbURL := u.Config("DB_URL")
+	dbURL := os.Getenv("DB_URL")
 	if err != nil {
 		log.Fatalln("Check your .env file")
 	}

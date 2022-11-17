@@ -20,22 +20,30 @@ func setupRoutes(app *fiber.App) {
 	api.Patch("/dogs/:id<int>", db.UpdateDogPartial)
 	api.Delete("/dogs/:id<int>", db.RemoveDog)
 
+	setupRoutesSpecial(app.Group("/path"))
 	setupRoutesOthers(app.Group("/test"))
 }
 
-func setupRoutesOthers(router fiber.Router) {
-	// http://localhost:3000/test/greedy/?name=Bilbo
-	// http://localhost:3000/test/greedy/?name=Bilbo&family=Baggins&city=Shire
+func setupRoutesSpecial(router fiber.Router) {
+	// greedy/{Any} 가 아니면 404 Not Found 처리
+	// 된다 http://localhost:3000/path/greedy/ABC ==> ABC
+	// 된다 http://localhost:3000/path/greedy/ABC/DEF/G ==> ABC/DEF/G
+	// 안됨 http://localhost:3000/path/greedy/
+	// 안됨 http://localhost:3000/path/greedy/?name=Bilbo&family=Baggins&city=Shire
 	router.Get("/greedy/+", func(c *fiber.Ctx) error {
 		return c.SendString(c.Params("+"))
 	})
 
 	// Limitations for characters in the path
+	// http://localhost:3000/path/resource/key:value
 	router.Get("/resource/key\\:value", func(c *fiber.Ctx) error {
 		return c.SendString("escaped key:value")
 	})
+}
 
-	// http://localhost:3000/test/hello/register
+func setupRoutesOthers(router fiber.Router) {
+	// '*' 은 후속 Path Param 이 없어도 된다
+	// http://localhost:3000/test/hello/Golang
 	router.Get("/hello/*", func(c *fiber.Ctx) error {
 		msg := fmt.Sprintf("✋ %s", c.Params("*"))
 		return c.SendString(msg) // => ✋ register
@@ -53,6 +61,8 @@ func setupRoutesOthers(router fiber.Router) {
 		return c.SendString(msg) // => 📃 dictionary.txt
 	})
 
+	// {:gender} 는 optional 이다 (?표시)
+	// http://localhost:3000/test/john/75
 	// http://localhost:3000/test/john/75/male
 	router.Get("/:name/:age/:gender?", func(c *fiber.Ctx) error {
 		msg := fmt.Sprintf("👴 %s is %s years old", c.Params("name"), c.Params("age"))
@@ -62,6 +72,7 @@ func setupRoutesOthers(router fiber.Router) {
 		return c.SendString(msg) // => 👴 john is 75 years old
 	})
 
+	// 이 외의 모든 패턴을 처리한다
 	// http://localhost:3000/test/john
 	router.Get("/:name", func(c *fiber.Ctx) error {
 		msg := fmt.Sprintf("Hello, %s 👋!", c.Params("name"))

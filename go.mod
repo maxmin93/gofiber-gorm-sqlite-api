@@ -4,6 +4,8 @@ go 1.19
 
 require (
 	github.com/gofiber/fiber/v2 v2.39.0
+	golang.org/x/exp v0.0.0-20221114191408-850992195362
+	gopkg.in/go-playground/validator.v9 v9.31.0
 	gorm.io/gorm v1.24.1
 )
 
@@ -11,8 +13,7 @@ require (
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
-	golang.org/x/exp v0.0.0-20221114191408-850992195362 // indirect
-	gopkg.in/go-playground/validator.v9 v9.31.0 // indirect
+	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 )
 
 require (
