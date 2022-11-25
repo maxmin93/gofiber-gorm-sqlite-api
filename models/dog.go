@@ -45,9 +45,8 @@ func ToNullInt16(v int) NullInt16 {
 func (v NullInt16) MarshalJSON() ([]byte, error) {
 	if v.Valid {
 		return json.Marshal(v.Int16)
-	} else {
-		return json.Marshal(nil)
 	}
+	return json.Marshal(nil)
 }
 
 // UnmarshalJSON unmarshal json of NullInt16
